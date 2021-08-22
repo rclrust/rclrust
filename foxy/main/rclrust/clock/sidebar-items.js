@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ClockType","Time source type, used to indicate the source of a time measurement."]],"struct":[["Clock",""]]});

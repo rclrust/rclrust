@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["FFIString","An array of 8-bit characters terminated by a null character."],["FFIWString","An array of 16-bit characters terminated by a null character."],["OwnedFFIString",""],["OwnedFFIWString",""]]});

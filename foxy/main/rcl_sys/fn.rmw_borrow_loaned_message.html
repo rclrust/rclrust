@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Borrow a loaned ROS message. **"><meta name="keywords" content="rust, rustlang, rust-lang, rmw_borrow_loaned_message"><title>rmw_borrow_loaned_message in rcl_sys - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../rcl_sys/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="index.html">rcl_sys</a></h2><div id="sidebar-vars" data-name="rmw_borrow_loaned_message" data-ty="fn" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Function <a href="index.html">rcl_sys</a>::<wbr><a class="fn" href="#">rmw_borrow_loaned_message</a><button id="copy-path" onclick="copy_path(this)" title="copy path"><img src="../clipboard.svg" width="19" height="18" alt="Copy item import" title="Copy item import to clipboard"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/rcl_sys/home/runner/work/rclrust/rclrust/target/debug/build/rcl-sys-5a364cd9072c8ec5/out/bindings.rs.html#12805-12809" title="goto source code">[src]</a></span></h1><pre class="rust fn">pub unsafe extern &quot;C&quot; fn rmw_borrow_loaned_message(<br>&nbsp;&nbsp;&nbsp;&nbsp;publisher: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*const </a><a class="struct" href="struct.rmw_publisher_t.html" title="struct rcl_sys::rmw_publisher_t">rmw_publisher_t</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;type_support: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*const </a><a class="struct" href="struct.rosidl_message_type_support_t.html" title="struct rcl_sys::rosidl_message_type_support_t">rosidl_message_type_support_t</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;ros_message: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*mut </a><a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/1.54.0/core/ffi/enum.c_void.html" title="enum core::ffi::c_void">c_void</a><br>) -&gt; <a class="type" href="type.rmw_ret_t.html" title="type rcl_sys::rmw_ret_t">rmw_ret_t</a></pre><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Borrow a loaned ROS message.
+**</p>
+<ul>
+<li>This ROS message is owned by the middleware, that will keep it alive (i.e. in valid</li>
+<li>memory space) until the caller publishes it using rmw_publish_loaned_message() or</li>
+<li>returns it using rmw_return_loaned_message_from_publisher().</li>
+<li></li>
+<li><hr>
+</li>
+<li>Attribute          | Adherence</li>
+<li>—————— | ———––</li>
+<li>Allocates Memory   | Maybe</li>
+<li>Thread-Safe        | Yes</li>
+<li>Uses Atomics       | Maybe [1]</li>
+<li>Lock-Free          | Maybe [1]</li>
+<li></li>
+<li><i>[1] implementation defined, check implementation documentation.</i></li>
+<li></li>
+<li>\par Runtime behavior</li>
+<li>To borrow a ROS message is a synchronous operation.</li>
+<li>It is also non-blocking, but it is not guaranteed to be lock-free.</li>
+<li>Generally speaking, implementations may synchronize access to internal resources using</li>
+<li>locks but are not allowed to wait for events with no guaranteed time bound (barring</li>
+<li>the effects of starvation due to OS scheduling).</li>
+<li></li>
+<li>\par Memory allocation</li>
+<li>It is implementation defined whether memory will be allocated on borrow or not.</li>
+<li>Check the implementation documentation to learn about memory allocation</li>
+<li>guarantees when using ROS message loaning support.</li>
+<li></li>
+<li>\par Thread-safety</li>
+<li>Publishers are thread-safe objects, and so are all operations on them except for finalization.</li>
+<li>Therefore, it is safe to borrow ROS messages from the same publisher concurrently.</li>
+<li></li>
+<li>\pre Given <code>publisher</code> must be a valid publisher, as returned by rmw_create_publisher().</li>
+<li>\pre Given <code>type_support</code> must be a valid <code>rosidl</code> message type support, matching the</li>
+<li>one registered with the <code>publisher</code> on creation.</li>
+<li></li>
+<li>\param[in] publisher Publisher to which the loaned ROS message will be associated.</li>
+<li>\param[in] type_support Message type support of the loaned ROS message.</li>
+<li>\param[out] ros_message Pointer to type erased ROS message loaned by the middleware.</li>
+<li>\return <code>RMW_RET_OK</code> if successful, or</li>
+<li>\return <code>RMW_RET_BAD_ALLOC</code> if memory allocation fails, or</li>
+<li>\return <code>RMW_RET_INVALID_ARGUMENT</code> if <code>publisher</code> is NULL, or</li>
+<li>\return <code>RMW_RET_INVALID_ARGUMENT</code> if <code>type_support</code> is NULL, or</li>
+<li>\return <code>RMW_RET_INVALID_ARGUMENT</code> if <code>ros_message</code> is NULL, or</li>
+<li>\return <code>RMW_RET_INVALID_ARGUMENT</code> if <code>*ros_message</code> is not NULL (to prevent leaks), or</li>
+<li>\return <code>RMW_RET_INCORRECT_RMW_IMPLEMENTATION</code> if <code>publisher</code> implementation identifier</li>
+<li>does not match this implementation, or</li>
+<li>\return <code>RMW_RET_UNSUPPORTED</code> if the implementation does not support ROS message loaning, or</li>
+<li>\return <code>RMW_RET_ERROR</code> if an unexpected error occured.
+*/</li>
+</ul>
+</div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="rcl_sys" data-search-index-js="../search-index.js" data-search-js="../search.js"></div><script src="../main.js"></script></body></html>
