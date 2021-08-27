@@ -135,6 +135,30 @@
 <span id="133">133</span>
 <span id="134">134</span>
 <span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="prelude-ty">Result</span>};
 
@@ -144,7 +168,7 @@
 };
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">RclWaitSet</span>(<span class="ident">rcl_sys::rcl_wait_set_t</span>);
+<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">RclWaitSet</span>(<span class="ident">rcl_sys::rcl_wait_set_t</span>);
 
 <span class="kw">impl</span> <span class="ident">RclWaitSet</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
@@ -212,12 +236,24 @@
         }
     }
 
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">subscriptions_ready</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">std::slice::from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">subscriptions</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">size_of_subscriptions</span>) }
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="op">!</span><span class="ident">p</span>.<span class="ident">is_null</span>())
+    }
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_timer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timer</span>: <span class="kw-2">&amp;</span><span class="ident">RclTimer</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="ident">rcl_sys::rcl_wait_set_add_timer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">timer</span>.<span class="ident">raw</span>(), <span class="ident">std::ptr::null_mut</span>())
                 .<span class="ident">to_result</span>()
                 .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;rcl_sys::rcl_wait_set_add_timer in RclWaitSet::add_timer&quot;</span>)
         }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">timers_ready</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">std::slice::from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">timers</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">size_of_timers</span>) }
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="op">!</span><span class="ident">p</span>.<span class="ident">is_null</span>())
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_client</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="ident">RclClient</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
@@ -228,12 +264,24 @@
         }
     }
 
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clients_ready</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">std::slice::from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">clients</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">size_of_clients</span>) }
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="op">!</span><span class="ident">p</span>.<span class="ident">is_null</span>())
+    }
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_service</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">service</span>: <span class="kw-2">&amp;</span><span class="ident">RclService</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="ident">rcl_sys::rcl_wait_set_add_service</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="number">0</span>, <span class="ident">service</span>.<span class="ident">raw</span>(), <span class="ident">std::ptr::null_mut</span>())
                 .<span class="ident">to_result</span>()
                 .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;rcl_sys::rcl_wait_set_add_service in RclWaitSet::add_service&quot;</span>)
         }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">services_ready</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">bool</span><span class="op">&gt;</span> {
+        <span class="kw">unsafe</span> { <span class="ident">std::slice::from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">services</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">size_of_services</span>) }
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="op">!</span><span class="ident">p</span>.<span class="ident">is_null</span>())
     }
 }
 

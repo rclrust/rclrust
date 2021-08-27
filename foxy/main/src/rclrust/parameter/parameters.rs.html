@@ -424,8 +424,19 @@
 <span id="422">422</span>
 <span id="423">423</span>
 <span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">collections::HashMap</span>, <span class="ident">sync::Mutex</span>};
+<span class="kw">use</span> <span class="ident">std</span>::{
+    <span class="ident">collections::HashMap</span>,
+    <span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">Mutex</span>},
+};
 
 <span class="kw">use</span> <span class="ident">anyhow::Result</span>;
 
@@ -454,11 +465,16 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parameters</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">context_handle</span>: <span class="kw-2">&amp;</span><span class="ident">RclContext</span>, <span class="ident">node_handle</span>: <span class="kw-2">&amp;</span><span class="ident">RclNode</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(
+        <span class="ident">context_handle</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">RclContext</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">node_handle</span>: <span class="kw-2">&amp;</span><span class="ident">RclNode</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parameter_overrides</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
 
         <span class="kw">if</span> <span class="ident">node_handle</span>.<span class="ident">use_global_arguments</span>().<span class="ident">unwrap</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rcl_params</span>) <span class="op">=</span> <span class="ident">RclParams::new</span>(<span class="ident">context_handle</span>.<span class="ident">global_arguments</span>())<span class="question-mark">?</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rcl_params</span>) <span class="op">=</span>
+                <span class="ident">RclParams::new</span>(<span class="ident">context_handle</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">global_arguments</span>())<span class="question-mark">?</span>
+            {
                 <span class="ident">parameter_overrides</span> <span class="op">=</span>
                     <span class="ident">rcl_params</span>.<span class="ident">to_parameters</span>(<span class="kw-2">&amp;</span><span class="ident">node_handle</span>.<span class="ident">fully_qualified_name</span>())<span class="question-mark">?</span>;
             }

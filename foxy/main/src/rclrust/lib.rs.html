@@ -36,7 +36,6 @@
 <span id="34">34</span>
 <span id="35">35</span>
 <span id="36">36</span>
-<span id="37">37</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">warn</span>(
     <span class="ident">rust_2018_idioms</span>,
@@ -50,9 +49,9 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">clock</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">context</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">error</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">executor</span>;
+<span class="kw">mod</span> <span class="ident">executor</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">init_options</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">internal</span>;
+<span class="kw">mod</span> <span class="ident">internal</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">log</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">node</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">node_options</span>;
@@ -64,11 +63,10 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">time</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">timer</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">utility</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wait_set</span>;
+<span class="kw">mod</span> <span class="ident">wait_set</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">clock</span>::{<span class="ident">Clock</span>, <span class="ident">ClockType</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">context::Context</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">executor</span>::{<span class="ident">spin</span>, <span class="ident">spin_some</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">init_options::InitOptions</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">log::Logger</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">node_options::NodeOptions</span>;

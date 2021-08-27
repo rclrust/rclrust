@@ -130,8 +130,8 @@
 <span class="kw">use</span> <span class="ident">array_init::array_init</span>;
 <span class="kw">use</span> <span class="ident">widestring::U16String</span>;
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MessageT</span>: <span class="ident">Default</span> {
-    <span class="kw">type</span> <span class="ident">Raw</span>: <span class="ident">FFIToRust</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Drop</span>;
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">MessageT</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
+    <span class="kw">type</span> <span class="ident">Raw</span>: <span class="ident">FFIToRust</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Drop</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>;
     <span class="kw">type</span> <span class="ident">RawRef</span>: <span class="ident">FFIFromRust</span><span class="op">&lt;</span><span class="ident">From</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">type_support</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
@@ -145,14 +145,14 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ServiceT</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ServiceT</span>: <span class="ident">Send</span> {
     <span class="kw">type</span> <span class="ident">Request</span>: <span class="ident">MessageT</span>;
     <span class="kw">type</span> <span class="ident">Response</span>: <span class="ident">MessageT</span>;
 
     <span class="kw">fn</span> <span class="ident">type_support</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_void</span>;
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ActionT</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ActionT</span>: <span class="ident">Send</span> {
     <span class="kw">type</span> <span class="ident">Goal</span>: <span class="ident">MessageT</span>;
     <span class="kw">type</span> <span class="prelude-ty">Result</span>: <span class="ident">MessageT</span>;
     <span class="kw">type</span> <span class="ident">Feedback</span>: <span class="ident">MessageT</span>;

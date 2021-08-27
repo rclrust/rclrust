@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Client",""],["ServiceResponseTask",""]]});
+initSidebarItems({"struct":[["Client",""]]});
