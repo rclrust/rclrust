@@ -377,10 +377,10 @@
 
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Runtime Error: {0}&quot;</span>)]</span>
     <span class="ident">RuntimeError</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
-    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Service is canceled.&quot;</span>)]</span>
-    <span class="ident">ServiceIsCanceled</span>,
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Internal message queue if full: {type_} {name}&quot;</span>)]</span>
     <span class="ident">MessageQueueIsFull</span> { <span class="ident">type_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">name</span>: <span class="ident">String</span> },
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Out of range: {0}&quot;</span>)]</span>
+    <span class="ident">OutOfRange</span>(<span class="ident">String</span>),
 
     <span class="comment">// Parameter</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">r#&quot;Parameter &quot;{name}&quot; cannot be set because it was not declared.&quot;#</span>)]</span>

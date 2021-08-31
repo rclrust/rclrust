@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["RclService",""],["Service",""]]});
+initSidebarItems({"struct":[["Service",""]]});
