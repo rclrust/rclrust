@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ModelCoefficients",""],["ModelCoefficients_Raw",""],["PointIndices",""],["PointIndices_Raw",""],["PolygonMesh",""],["PolygonMesh_Raw",""],["Vertices",""],["Vertices_Raw",""]]});

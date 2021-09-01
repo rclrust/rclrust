@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["ActionT",""],["FFIFromRust",""],["FFIToRust",""],["InternalDefault",""],["MessageT",""],["ServiceT",""]]});

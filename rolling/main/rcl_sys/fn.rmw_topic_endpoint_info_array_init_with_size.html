@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Initialize an array of topic endpoint information. **"><meta name="keywords" content="rust, rustlang, rust-lang, rmw_topic_endpoint_info_array_init_with_size"><title>rmw_topic_endpoint_info_array_init_with_size in rcl_sys - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../rcl_sys/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="index.html">rcl_sys</a></h2><div id="sidebar-vars" data-name="rmw_topic_endpoint_info_array_init_with_size" data-ty="fn" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Function <a href="index.html">rcl_sys</a>::<wbr><a class="fn" href="#">rmw_topic_endpoint_info_array_init_with_size</a><button id="copy-path" onclick="copy_path(this)" title="copy path"><img src="../clipboard.svg" width="19" height="18" alt="Copy item import" title="Copy item import to clipboard"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/rcl_sys/home/runner/work/rclrust/rclrust/target/debug/build/rcl-sys-6713fe6a96f5e6f0/out/bindings.rs.html#6131-6135" title="goto source code">[src]</a></span></h1><pre class="rust fn">pub unsafe extern &quot;C&quot; fn rmw_topic_endpoint_info_array_init_with_size(<br>&nbsp;&nbsp;&nbsp;&nbsp;topic_endpoint_info_array: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*mut </a><a class="struct" href="struct.rmw_topic_endpoint_info_array_t.html" title="struct rcl_sys::rmw_topic_endpoint_info_array_t">rmw_topic_endpoint_info_array_t</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;size: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.usize.html">usize</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;allocator: <a class="primitive" href="https://doc.rust-lang.org/1.54.0/std/primitive.pointer.html">*mut </a><a class="struct" href="struct.rcutils_allocator_t.html" title="struct rcl_sys::rcutils_allocator_t">rcutils_allocator_t</a><br>) -&gt; <a class="type" href="type.rmw_ret_t.html" title="type rcl_sys::rmw_ret_t">rmw_ret_t</a></pre><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Initialize an array of topic endpoint information.
+**</p>
+<ul>
+<li>This function allocates space to hold <code>size</code> topic endpoint information elements.</li>
+<li>Both <code>info_array</code> and <code>size</code> members are updated accordingly.</li>
+<li></li>
+<li><hr>
+</li>
+<li>Attribute          | Adherence</li>
+<li>—————— | ———––</li>
+<li>Allocates Memory   | Yes</li>
+<li>Thread-Safe        | No</li>
+<li>Uses Atomics       | No</li>
+<li>Lock-Free          | Yes</li>
+<li></li>
+<li>\par Thread-safety</li>
+<li>Initialization is a reentrant procedure, but:</li>
+<li>
+<ul>
+<li>Access to the array of topic endpoint information is not synchronized.</li>
+</ul>
+</li>
+<li>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="ident">It</span> <span class="ident">is</span> <span class="ident">not</span> <span class="ident">safe</span> <span class="ident">to</span> <span class="ident">read</span> <span class="ident">or</span> <span class="ident">write</span> `<span class="ident">topic_endpoint_info_array</span>` <span class="ident">during</span> <span class="ident">initialization</span>.</pre></div>
+</li>
+<li>
+<ul>
+<li>The default allocators are thread-safe objects, but any custom <code>allocator</code> may not be.</li>
+</ul>
+</li>
+<li>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="ident">Check</span> <span class="ident">your</span> <span class="ident">allocator</span> <span class="ident">documentation</span> <span class="kw">for</span> <span class="ident">further</span> <span class="ident">reference</span>.</pre></div>
+</li>
+<li></li>
+<li>\param[inout] topic_endpoint_info_array Array to be initialized on success,</li>
+<li>but left unchanged on failure.</li>
+<li>\param[in] size Size of the array.</li>
+<li>\param[in] allocator Allocator to be used to populate <code>names_and_types</code>.</li>
+<li>\returns <code>RMW_RET_OK</code> if successful, or</li>
+<li>\returns <code>RMW_RET_INVALID_ARGUMENT</code> if <code>topic_endpoint_info_array</code> is NULL, or</li>
+<li>\returns <code>RMW_RET_INVALID_ARGUMENT</code> if <code>topic_endpoint_info_array</code> is not</li>
+<li>a zero initialized array, or</li>
+<li>\returns <code>RMW_RET_INVALID_ARGUMENT</code> if <code>allocator</code> is invalid,</li>
+<li>by rcutils_allocator_is_valid() definition, or</li>
+<li>\returns <code>RMW_BAD_ALLOC</code> if memory allocation fails, or</li>
+<li>\returns <code>RMW_RET_ERROR</code> when an unspecified error occurs.</li>
+<li>\remark This function sets the RMW error state on failure.
+*/</li>
+</ul>
+</div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="rcl_sys" data-search-index-js="../search-index.js" data-search-js="../search.js"></div><script src="../main.js"></script></body></html>

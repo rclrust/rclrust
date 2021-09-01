@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Empty",""],["Empty_Request",""],["Empty_Request_Raw",""],["Empty_Response",""],["Empty_Response_Raw",""],["SetBool",""],["SetBool_Request",""],["SetBool_Request_Raw",""],["SetBool_Response",""],["SetBool_Response_Raw",""],["Trigger",""],["Trigger_Request",""],["Trigger_Request_Raw",""],["Trigger_Response",""],["Trigger_Response_Raw",""]]});
