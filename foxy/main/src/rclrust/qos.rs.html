@@ -600,6 +600,19 @@
 <span id="598">598</span>
 <span id="599">599</span>
 <span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::time::Duration</span>;
 
@@ -698,6 +711,7 @@
     <span class="ident">rcl_sys::rmw_qos_liveliness_policy_t</span>,
     <span class="ident">SystemDefault</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_SYSTEM_DEFAULT</span>,
     <span class="ident">Automatic</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_AUTOMATIC</span>,
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
     <span class="ident">ManualByNode</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE</span>,
     <span class="ident">ManualByTopic</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC</span>,
     <span class="ident">Unknown</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_UNKNOWN</span>,
@@ -712,6 +726,12 @@
     <span class="ident">Reliability</span>,
     <span class="ident">History</span>,
     <span class="ident">Lifespan</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">Depth</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">LivelinessLeaseDuration</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">AvoidROSNamespaceConventions</span>,
 }
 
 <span class="macro">impl_from_trait_for_enum!</span> {
@@ -724,6 +744,12 @@
     <span class="ident">Reliability</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_RELIABILITY</span>,
     <span class="ident">History</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_HISTORY</span>,
     <span class="ident">Lifespan</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIFESPAN</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">Depth</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_DEPTH</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">LivelinessLeaseDuration</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_LIVELINESS_LEASE_DURATION</span>,
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;galactic+&quot;</span>)]</span>
+    <span class="ident">AvoidROSNamespaceConventions</span> :<span class="op">=</span> <span class="ident">RMW_QOS_POLICY_AVOID_ROS_NAMESPACE_CONVENTIONS</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">PolicyKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">String</span> {

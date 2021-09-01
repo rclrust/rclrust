@@ -33,29 +33,43 @@
 <span id="31">31</span>
 <span id="32">32</span>
 <span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
 </pre><pre class="rust">
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">impl_from_trait_for_enum</span> {
     (
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span>: <span class="ident">ty</span>,
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span>: <span class="ident">ty</span>,
-        $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span>: <span class="ident">ident</span> :<span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span>: <span class="ident">ident</span> ),<span class="op">+</span>
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span>:<span class="ident">ty</span>,
+        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span>:<span class="ident">ty</span>,
+        $(
+            $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">m</span>:<span class="ident">meta</span>]</span>)<span class="question-mark">?</span>
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span>:<span class="ident">ident</span> :<span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span>:<span class="ident">ident</span>
+        ),<span class="op">+</span>
         $(,)<span class="question-mark">?</span>
     ) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span> {
-            <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">item</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="kw">match</span> <span class="ident">item</span> {
-                    $(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span>),<span class="op">+</span>
+                    $(
+                        $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">m</span>]</span>)<span class="question-mark">?</span>
+                        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span>
+                    ),<span class="op">+</span>
                 }
             }
         }
 
         <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_type</span> {
-            <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">item</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="kw">match</span> <span class="ident">item</span> {
-                    $(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span>),<span class="op">+</span>
+                    $(
+                        $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">m</span>]</span>)<span class="question-mark">?</span>
+                        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_type</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">new_item</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">old_item</span>
+                    ),<span class="op">+</span>
                 }
             }
         }
