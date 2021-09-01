@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Initialize the logging system using the specified allocator. **"><meta name="keywords" content="rust, rustlang, rust-lang, rcutils_logging_initialize_with_allocator"><title>rcutils_logging_initialize_with_allocator in rcl_sys - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../rcl_sys/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="index.html">rcl_sys</a></h2><div id="sidebar-vars" data-name="rcutils_logging_initialize_with_allocator" data-ty="fn" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Function <a href="index.html">rcl_sys</a>::<wbr><a class="fn" href="#">rcutils_logging_initialize_with_allocator</a><button id="copy-path" onclick="copy_path(this)" title="copy path"><img src="../clipboard.svg" width="19" height="18" alt="Copy item import" title="Copy item import to clipboard"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/rcl_sys/home/runner/work/rclrust/rclrust/target/debug/build/rcl-sys-6713fe6a96f5e6f0/out/bindings.rs.html#2482-2484" title="goto source code">[src]</a></span></h1><pre class="rust fn">pub unsafe extern &quot;C&quot; fn rcutils_logging_initialize_with_allocator(<br>&nbsp;&nbsp;&nbsp;&nbsp;allocator: <a class="struct" href="struct.rcutils_allocator_t.html" title="struct rcl_sys::rcutils_allocator_t">rcutils_allocator_t</a><br>) -&gt; <a class="type" href="type.rcutils_ret_t.html" title="type rcl_sys::rcutils_ret_t">rcutils_ret_t</a></pre><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Initialize the logging system using the specified allocator.
+**</p>
+<ul>
+<li>Initialize the logging system only if it was not in an initialized state.</li>
+<li></li>
+<li>If an invalid allocator is passed, the initialization will fail.</li>
+<li>Otherwise, this function will still set the internal state to initialized</li>
+<li>even if an error occurs, to avoid repeated failing initialization attempts</li>
+<li>since this function is called automatically from logging macros.</li>
+<li>To re-attempt initialization, call rcutils_logging_shutdown() before</li>
+<li>re-calling this function.</li>
+<li></li>
+<li>If multiple errors occur, the error code of the last error will be returned.</li>
+<li></li>
+<li>The <code>RCUTILS_CONSOLE_OUTPUT_FORMAT</code> environment variable can be used to set</li>
+<li>the output format of messages logged to the console.</li>
+<li>Available tokens are:</li>
+<li>
+<ul>
+<li><code>file_name</code>, the full file name of the caller including the path</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>function_name</code>, the function name of the caller</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>line_number</code>, the line number of the caller</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>message</code>, the message string after it has been formatted</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>name</code>, the full logger name</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>severity</code>, the name of the severity level, e.g. <code>INFO</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>time</code>, the timestamp of log message in floating point seconds</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>time_as_nanoseconds</code>, the timestamp of log message in integer nanoseconds</li>
+</ul>
+</li>
+<li></li>
+<li>The <code>RCUTILS_COLORIZED_OUTPUT</code> environment variable allows configuring if colours</li>
+<li>are used or not. Available values are:</li>
+<li>
+<ul>
+<li><code>1</code>: Force using colours.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>0</code>: Don’t use colours.</li>
+</ul>
+</li>
+<li>If it is unset, colours are used depending if the target stream is a terminal or not.</li>
+<li>See <code>isatty</code> documentation.</li>
+<li></li>
+<li>The format string can use these tokens by referencing them in curly brackets,</li>
+<li>e.g. <code>&quot;[{severity}] [{name}]: {message} ({function_name}() at {file_name}:{line_number})&quot;</code>.</li>
+<li>Any number of tokens can be used.</li>
+<li>The limit of the format string is 2048 characters.</li>
+<li></li>
+<li><hr>
+</li>
+<li>Attribute          | Adherence</li>
+<li>—————— | ———––</li>
+<li>Allocates Memory   | Yes</li>
+<li>Thread-Safe        | No</li>
+<li>Uses Atomics       | No</li>
+<li>Lock-Free          | Yes</li>
+<li></li>
+<li>\param[in] allocator rcutils_allocator_t to be used.</li>
+<li>\return #RCUTILS_RET_OK if successful, or</li>
+<li>\return #RCUTILS_RET_INVALID_ARGUMENT if the allocator is invalid, in which</li>
+<li>case initialization will fail, or</li>
+<li>\return #RCUTILS_RET_INVALID_ARGUMENT if an error occurs reading the output</li>
+<li>format from the <code>RCUTILS_CONSOLE_OUTPUT_FORMAT</code> environment variable, in</li>
+<li>which case the default format will be used, or</li>
+<li>\return #RCUTILS_RET_LOGGING_SEVERITY_MAP_INVALID if the internal logger</li>
+<li>severity level map cannot be initialized, in which case logger severity</li>
+<li>levels will not be configurable.
+*/</li>
+</ul>
+</div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="rcl_sys" data-search-index-js="../search-index.js" data-search-js="../search.js"></div><script src="../main.js"></script></body></html>

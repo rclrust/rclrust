@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["GoalID",""],["GoalID_Raw",""],["GoalStatus",""],["GoalStatusArray",""],["GoalStatusArray_Raw",""],["GoalStatus_Raw",""]]});
