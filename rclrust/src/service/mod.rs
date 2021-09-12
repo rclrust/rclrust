@@ -74,9 +74,8 @@ where
     /// ```
     /// # use anyhow::Result;
     /// # use rclrust::qos::QoSProfile;
-    /// use rclrust_msg::std_srvs::srv::Empty;
-    /// # use rclrust_msg::std_srvs::srv::Empty_Response;
-    ///
+    /// # use rclrust_msg::std_srvs::srv::{Empty, Empty_Response};
+    /// #
     /// # #[tokio::main]
     /// # async fn main() -> Result<()> {
     /// # let ctx = rclrust::init()?;
@@ -84,7 +83,7 @@ where
     /// # let callback = |_req| Empty_Response {};
     /// let subscription =
     ///     node.create_service::<Empty, _>("service", callback, &QoSProfile::default())?;
-    /// assert!(subscription.is_valid());
+    /// assert_eq!(subscription.service_name().unwrap(), "/service");
     /// # Ok(())
     /// # }
     /// ```
@@ -99,9 +98,8 @@ where
     /// ```
     /// # use anyhow::Result;
     /// # use rclrust::qos::QoSProfile;
-    /// use rclrust_msg::std_srvs::srv::Empty;
-    /// # use rclrust_msg::std_srvs::srv::Empty_Response;
-    ///
+    /// # use rclrust_msg::std_srvs::srv::{Empty, Empty_Response};
+    /// #
     /// # #[tokio::main]
     /// # async fn main() -> Result<()> {
     /// # let ctx = rclrust::init()?;
