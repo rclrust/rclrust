@@ -543,10 +543,10 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">parse_bool_literal</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="macro">assert_eq!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;true&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>, <span class="bool-val">true</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;false&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>, <span class="bool-val">false</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;1&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>, <span class="bool-val">true</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;0&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>, <span class="bool-val">false</span>);
+        <span class="macro">assert!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;true&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">bool_literal</span>(<span class="string">&quot;false&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>);
+        <span class="macro">assert!</span>(<span class="ident">bool_literal</span>(<span class="string">&quot;1&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>);
+        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">bool_literal</span>(<span class="string">&quot;0&quot;</span>)<span class="question-mark">?</span>.<span class="number">1</span>);
         <span class="prelude-val">Ok</span>(())
     }
 
