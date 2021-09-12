@@ -733,7 +733,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">read_overrided_value</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parameter_overrides</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">parameter_overrides</span>.<span class="ident">insert</span>(<span class="ident">PARAM_NAME</span>.<span class="ident">into</span>(), <span class="ident">ParameterValue::double</span>(<span class="number">3.14</span>));
+        <span class="ident">parameter_overrides</span>.<span class="ident">insert</span>(<span class="ident">PARAM_NAME</span>.<span class="ident">into</span>(), <span class="ident">ParameterValue::double</span>(<span class="number">32.3</span>));
         <span class="kw">let</span> <span class="ident">parameters</span> <span class="op">=</span> <span class="ident">Parameters</span> {
             <span class="ident">parameter_overrides</span>,
             ..<span class="ident">Default::default</span>()
@@ -749,7 +749,7 @@
         <span class="macro">assert!</span>(<span class="ident">parameters</span>.<span class="ident">has_parameter</span>(<span class="ident">PARAM_NAME</span>));
         <span class="macro">assert_eq!</span>(
             <span class="ident">parameters</span>.<span class="ident">get_parameter</span>(<span class="ident">PARAM_NAME</span>),
-            <span class="prelude-val">Some</span>(<span class="ident">Parameter::double</span>(<span class="ident">PARAM_NAME</span>, <span class="number">3.14</span>))
+            <span class="prelude-val">Some</span>(<span class="ident">Parameter::double</span>(<span class="ident">PARAM_NAME</span>, <span class="number">32.3</span>))
         );
 
         <span class="prelude-val">Ok</span>(())
@@ -758,7 +758,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">set_parameter</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parameter_overrides</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">parameter_overrides</span>.<span class="ident">insert</span>(<span class="ident">PARAM_NAME</span>.<span class="ident">into</span>(), <span class="ident">ParameterValue::double</span>(<span class="number">3.14</span>));
+        <span class="ident">parameter_overrides</span>.<span class="ident">insert</span>(<span class="ident">PARAM_NAME</span>.<span class="ident">into</span>(), <span class="ident">ParameterValue::double</span>(<span class="number">1.0</span>));
         <span class="kw">let</span> <span class="ident">parameters</span> <span class="op">=</span> <span class="ident">Parameters</span> {
             <span class="ident">parameter_overrides</span>,
             ..<span class="ident">Default::default</span>()
