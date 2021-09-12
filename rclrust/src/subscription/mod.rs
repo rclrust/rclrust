@@ -186,6 +186,7 @@ mod test {
         let subscription =
             node.create_subscription::<Int32, _>("message", |_| (), &QoSProfile::default())?;
         assert_eq!(subscription.topic_name().unwrap(), "/message");
+
         Ok(())
     }
 
@@ -225,10 +226,10 @@ mod test {
         let ctx = crate::init()?;
         let mut node = ctx.create_node(&random_name())?;
         let qos = QoSProfile::sensor_data()
-            .deadline(Duration::from_secs(5))
-            .lifespan(Duration::from_secs(10))
+            .deadline(Duration::from_millis(5))
+            .lifespan(Duration::from_millis(10))
             .liveliness(LivelinessPolicy::Automatic)
-            .liveliness_lease_duration(Duration::from_secs(15));
+            .liveliness_lease_duration(Duration::from_millis(15));
         let subscription = node.create_subscription::<Int32, _>("message", |_| (), &qos)?;
 
         let actual_qos = subscription.actual_qos().unwrap();
