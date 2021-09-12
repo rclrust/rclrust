@@ -12,11 +12,11 @@ use crate::{
     qos::QoSProfile,
 };
 
-pub(crate) mod rcl_wrapper;
-pub(crate) use rcl_wrapper::RclSubscription;
+pub mod rcl_wrapper;
+pub use rcl_wrapper::RclSubscription;
 
-pub(crate) mod invoker;
-pub(crate) use invoker::{SubscriptionInvoker, SubscriptionInvokerBase};
+pub mod invoker;
+pub use invoker::{SubscriptionInvoker, SubscriptionInvokerBase};
 
 /// Subscription
 pub struct Subscription<T>
