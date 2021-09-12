@@ -1,6 +1,6 @@
-//! Wrapper for rcl/subscription.h
+//! Wrapper for rcl/service.h
 //!
-//! <https://docs.ros2.org/foxy/api/rcl/subscription_8h_source.html>
+//! <https://docs.ros2.org/foxy/api/rcl/service_8h_source.html>
 //!
 //! - [x] `rcl_get_zero_initialized_service`
 //! - [x] `rcl_service_init`
