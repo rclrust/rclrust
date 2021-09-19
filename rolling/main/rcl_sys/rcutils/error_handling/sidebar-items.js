@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["rcutils_get_error_state","Return an rcutils_error_state_t which was set with rcutils_set_error_state()."],["rcutils_reset_error","Reset the error state by clearing any previously set error state."]],"struct":[["rcutils_error_state_t","Struct which encapsulates the error state set by `RCUTILS_SET_ERROR_MSG()`."]]});

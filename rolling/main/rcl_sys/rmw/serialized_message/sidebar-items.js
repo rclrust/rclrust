@@ -1,0 +1,1 @@
+initSidebarItems({"type":[["rmw_serialized_message_t","Serialized message as a string of bytes."]]});
