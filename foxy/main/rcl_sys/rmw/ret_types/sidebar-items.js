@@ -1,0 +1,1 @@
+initSidebarItems({"type":[["rmw_ret_t","Return code for rmw functions"]]});

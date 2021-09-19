@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["rosidl_message_type_support_t","Contains rosidl message type support data"],["rosidl_service_type_support_t","Contains rosidl service type support data"]],"type":[["rosidl_message_typesupport_handle_function",""],["rosidl_service_typesupport_handle_function",""]]});
