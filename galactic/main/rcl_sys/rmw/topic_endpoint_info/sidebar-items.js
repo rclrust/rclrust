@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["rmw_topic_endpoint_info_t","A data structure that encapsulates the node name, node namespace, topic_type, gid, and qos_profile of publishers and subscriptions for a topic."]]});

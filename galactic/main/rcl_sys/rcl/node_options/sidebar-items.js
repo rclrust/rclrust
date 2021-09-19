@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["rcl_node_get_default_options","Return the default node options in a [rcl_node_options_t]."],["rcl_node_options_copy","Copy one options structure into another."],["rcl_node_options_fini","Finalize the given node_options."]],"struct":[["rcl_node_options_t","Structure which encapsulates the options for creating a rcl_node_t."]]});

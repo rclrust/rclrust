@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["LogSeverity",""]],"struct":[["Logger",""]]});
+initSidebarItems({"enum":[["LogSeverity","The severity levels of log messages / loggers."]],"struct":[["Logger",""]]});
