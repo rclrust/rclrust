@@ -653,6 +653,15 @@
 <span id="653">653</span>
 <span id="654">654</span>
 <span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
@@ -874,9 +883,7 @@
 
             <span class="ident">thread::spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">executor</span> <span class="op">=</span> <span class="ident">Executor::new</span>(<span class="ident">context</span>, <span class="ident">rx</span>);
-                <span class="kw">loop</span> {
-                    <span class="ident">executor</span>.<span class="ident">spin</span>()<span class="question-mark">?</span>
-                }
+                <span class="ident">executor</span>.<span class="ident">spin</span>()
             })
         };
 
@@ -1150,6 +1157,17 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_node_names_and_namespace</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">String</span>)<span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">handle</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">get_node_names_and_namespace</span>()
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Node</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="self">self</span>.<span class="ident">tx</span>
+            .<span class="ident">try_send</span>(<span class="ident">ExecutorMessage::Terminate</span>)
+            .<span class="ident">expect</span>(<span class="string">&quot;try_send should succeed&quot;</span>);
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">thread</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">wait_thread</span>.<span class="ident">take</span>() {
+            <span class="ident">thread</span>.<span class="ident">join</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
+        }
     }
 }
 
