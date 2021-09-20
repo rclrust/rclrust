@@ -71,6 +71,23 @@
 <span id="71">71</span>
 <span id="72">72</span>
 <span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt</span>, <span class="ident">sync::Arc</span>};
 
@@ -79,7 +96,7 @@
 <span class="kw">use</span> <span class="ident">rclrust_msg::_core::ServiceT</span>;
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">ChannelMessage</span>, <span class="ident">Client</span>, <span class="ident">RclClient</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error::RclRustError</span>, <span class="ident">internal::worker::WorkerMessage</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error::RclRustError</span>, <span class="ident">internal::worker::WorkerMessage</span>, <span class="ident">rclrust_debug</span>, <span class="ident">Logger</span>};
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ClientInvokerBase</span>: <span class="ident">fmt::Debug</span> {
     <span class="kw">fn</span> <span class="ident">handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">RclClient</span>;
@@ -129,7 +146,24 @@
 
     <span class="kw">fn</span> <span class="ident">invoke</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">tx</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">tx</span> {
-            <span class="kw">match</span> <span class="ident">tx</span>.<span class="ident">try_send</span>(<span class="ident">WorkerMessage::Message</span>(<span class="self">self</span>.<span class="ident">handle</span>.<span class="ident">take_response</span>::<span class="op">&lt;</span><span class="ident">Srv</span><span class="op">&gt;</span>()<span class="question-mark">?</span>)) {
+            <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">handle</span>.<span class="ident">take_response</span>::<span class="op">&lt;</span><span class="ident">Srv</span><span class="op">&gt;</span>() {
+                <span class="prelude-val">Ok</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">v</span>,
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="kw">return</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">RclRustError::RclClientTakeFailed</span>(<span class="kw">_</span>)) <span class="op">=</span>
+                        <span class="ident">e</span>.<span class="ident">downcast_ref</span>::<span class="op">&lt;</span><span class="ident">RclRustError</span><span class="op">&gt;</span>()
+                    {
+                        <span class="macro">rclrust_debug!</span>(
+                            <span class="ident">Logger::new</span>(<span class="string">&quot;rclrust&quot;</span>),
+                            <span class="string">&quot;`rcl_wait()` indicate that response is ready, however which incorrect. I know this happens when I use Cyclone DDS.&quot;</span>
+                        );
+                        <span class="prelude-val">Ok</span>(())
+                    } <span class="kw">else</span> {
+                        <span class="prelude-val">Err</span>(<span class="ident">e</span>)
+                    };
+                }
+            };
+
+            <span class="kw">match</span> <span class="ident">tx</span>.<span class="ident">try_send</span>(<span class="ident">WorkerMessage::Message</span>(<span class="ident">res</span>)) {
                 <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> (),
                 <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">is_disconnected</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">stop</span>(),
                 <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
