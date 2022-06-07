@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["rclrust"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.56.0/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"enum\" href=\"rclrust/error/enum.RclRustError.html\" title=\"enum rclrust::error::RclRustError\">RclRustError</a>","synthetic":false,"types":["rclrust::error::RclRustError"]}];
+implementors["rclrust"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.61.0/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"enum\" href=\"rclrust/error/enum.RclRustError.html\" title=\"enum rclrust::error::RclRustError\">RclRustError</a>","synthetic":false,"types":["rclrust::error::RclRustError"]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
