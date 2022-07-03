@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["RclTimer",""],["Timer",""]]});
+initSidebarItems({"struct":[["RclTimer",""],["Timer",""],["TimerInvoker",""]]});
