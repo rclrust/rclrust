@@ -350,7 +350,6 @@
 <span id="345">345</span>
 <span id="346">346</span>
 <span id="347">347</span>
-<span id="348">348</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">anyhow::anyhow</span>;
 <span class="kw">use</span> <span class="ident">nom</span>::{
     <span class="ident">branch::alt</span>,
@@ -459,19 +458,18 @@
             <span class="ident">opt</span>(<span class="ident">preceded</span>(<span class="ident">tag</span>(<span class="string">&quot;&lt;=&quot;</span>), <span class="ident">usize_literal</span>)),
         ),
         <span class="op">|</span>(<span class="ident">type_str</span>, <span class="ident">array_info</span>)<span class="op">|</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max_size</span>) <span class="op">=</span> <span class="ident">array_info</span> {
-                <span class="kw">match</span> <span class="ident">type_str</span> {
-                    <span class="string">&quot;string&quot;</span> =&gt; <span class="ident">GenericString::BoundedString</span>(<span class="ident">max_size</span>),
-                    <span class="string">&quot;wstring&quot;</span> =&gt; <span class="ident">GenericString::BoundedWString</span>(<span class="ident">max_size</span>),
-                    <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
-                }
-            } <span class="kw">else</span> {
-                <span class="kw">match</span> <span class="ident">type_str</span> {
+            <span class="ident">array_info</span>.<span class="ident">map_or_else</span>(
+                <span class="op">|</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">type_str</span> {
                     <span class="string">&quot;string&quot;</span> =&gt; <span class="ident">GenericString::String</span>,
                     <span class="string">&quot;wstring&quot;</span> =&gt; <span class="ident">GenericString::WString</span>,
                     <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
-                }
-            }
+                },
+                <span class="op">|</span><span class="ident">max_size</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">type_str</span> {
+                    <span class="string">&quot;string&quot;</span> =&gt; <span class="ident">GenericString::BoundedString</span>(<span class="ident">max_size</span>),
+                    <span class="string">&quot;wstring&quot;</span> =&gt; <span class="ident">GenericString::BoundedWString</span>(<span class="ident">max_size</span>),
+                    <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+                },
+            )
         },
     )(<span class="ident">s</span>)
 }
@@ -700,5 +698,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rclrust_msg_gen" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="rclrust_msg_gen" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0 (a8314ef7d 2022-06-27)" ></div>
 </body></html>

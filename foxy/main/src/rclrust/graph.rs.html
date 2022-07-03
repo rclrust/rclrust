@@ -96,7 +96,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error::ToRclRustResult</span>, <span class="ident">internal::ffi</span>::<span class="kw-2">*</span>, <span class="ident">log::Logger</span>, <span class="ident">rclrust_error</span>};
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">RclStringArray</span>(<span class="ident">rcl_sys::rcutils_string_array_t</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RclStringArray</span>(<span class="ident">rcl_sys::rcutils_string_array_t</span>);
 
 <span class="kw">impl</span> <span class="ident">RclStringArray</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
@@ -133,7 +133,7 @@
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">RclNamesAndTypes</span>(<span class="ident">rcl_sys::rcl_names_and_types_t</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RclNamesAndTypes</span>(<span class="ident">rcl_sys::rcl_names_and_types_t</span>);
 
 <span class="kw">impl</span> <span class="ident">RclNamesAndTypes</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
@@ -180,5 +180,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rclrust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rclrust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0 (a8314ef7d 2022-06-27)" ></div>
 </body></html>

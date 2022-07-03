@@ -667,6 +667,7 @@
 <span id="662">662</span>
 <span id="663">663</span>
 <span id="664">664</span>
+<span id="665">665</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
     <span class="ident">ffi::CString</span>,
@@ -721,15 +722,16 @@
         <span class="kw">let</span> <span class="ident">namespace_c_str</span> <span class="op">=</span> <span class="ident">CString::new</span>(<span class="ident">namespace</span>.<span class="ident">unwrap_or_default</span>())<span class="question-mark">?</span>;
 
         <span class="kw">unsafe</span> {
-            <span class="ident">rcl_sys::rcl_node_init</span>(
+            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">rcl_sys::rcl_node_init</span>(
                 <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">node</span>,
                 <span class="ident">name_c_str</span>.<span class="ident">as_ptr</span>(),
                 <span class="ident">namespace_c_str</span>.<span class="ident">as_ptr</span>(),
                 <span class="ident">context</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">raw_mut</span>(),
                 <span class="ident">options</span>.<span class="ident">raw</span>(),
-            )
-            .<span class="ident">to_result</span>()
-            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;rcl_sys::rcl_node_init in RclNode::new&quot;</span>)<span class="question-mark">?</span>;
+            );
+            <span class="ident">value</span>
+                .<span class="ident">to_result</span>()
+                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;rcl_sys::rcl_node_init in RclNode::new&quot;</span>)<span class="question-mark">?</span>;
         }
 
         <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
@@ -1332,5 +1334,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rclrust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rclrust" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0 (a8314ef7d 2022-06-27)" ></div>
 </body></html>
