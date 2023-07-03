@@ -22,7 +22,7 @@ By using proc-macro to generate message-type and service-type code, crate depend
   - Galctic ([doc](https://rclrust.github.io/rclrust/galactic/main/rclrust/index.html))
   - Rolling ([doc](https://rclrust.github.io/rclrust/rolling/main/rclrust/index.html))
 - OS:
-  - Ubutnu
+  - Ubuntu
 - DDS:
   - Fast DDS (Default for Foxy)
   - Cyclone DDS (Default for Galactic+)
